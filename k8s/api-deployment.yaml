@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api
+  namespace: confidential
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api
+  template:
+    metadata:
+      labels:
+        app: api
+    spec:
+      runtimeClassName: runsc    # switch to kata-qemu if desired
+      containers:
+      - name: api
+        image: api:latest
+        env:
+        - name: REDIS_HOST
+          value: "redis"
+        ports:
+        - containerPort: 5000

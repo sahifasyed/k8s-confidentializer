@@ -1,0 +1,1 @@
+This demo uses the upstream Redis image; no custom build required.
